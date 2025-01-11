@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://gvxkoanicbma"]
+[gd_scene load_steps=3 format=3 uid="uid://gvxkoanicbma"]
 
 [ext_resource type="Texture2D" uid="uid://bf2mtmkd6qcm4" path="res://assets/sprites/Char_3/Char_3_atlas.tres" id="1_2nscr"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qalj1"]
+radius = 16.0312
 
 [node name="Punch" type="Node2D"]
 
@@ -8,3 +11,9 @@
 texture = ExtResource("1_2nscr")
 region_enabled = true
 region_rect = Rect2(128, 128, 64, 64)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(6, -1)
+shape = SubResource("CircleShape2D_qalj1")
