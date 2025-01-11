@@ -14,6 +14,6 @@ func get_keyboard_actions(player_number: int) -> Dictionary:
         "left": "p1_move_left" if player_number == 1 else "p2_move_left",
         "right": "p1_move_right" if player_number == 1 else "p2_move_right",
         "jump": "p1_jump" if player_number == 1 else "p2_jump",
-        "punch": "p1_punch" if player_number == 1 else "p2_punch",
+        "attack": "p1_attack" if player_number == 1 else "p2_attack",
         "parry": "p1_parry" if player_number == 1 else "p2_parry",
     }
