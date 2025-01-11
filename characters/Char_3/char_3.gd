@@ -45,13 +45,14 @@ func _physics_process(delta: float) -> void:
             start_animation("kick")
 
 
-func be_attacked(puncher_position: Vector2, punch_power: float) -> void:
+func be_attacked(puncher_position: Vector2, force_base: float) -> void:
     start_animation("hurt")
 
+    var force_x := force_base if not is_on_floor() else force_base * 2.25
     if puncher_position.x < global_position.x:
-        velocity = Vector2(punch_power, -punch_power * 1.2)
+        velocity = Vector2(force_x, -force_base * 1.2)
     else:
-        velocity = Vector2(-punch_power, -punch_power * 1.2)
+        velocity = Vector2(-force_x, -force_base * 1.2)
 
 
 func update_sprite(direction: float) -> void:
