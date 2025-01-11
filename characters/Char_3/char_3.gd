@@ -64,7 +64,7 @@ func update_sprite(direction: float) -> void:
 
     if is_on_floor() and not %AnimationPlayer.current_animation and not %Stand.visible:
         %AnimationPlayer.play("RESET")
-    elif not is_on_floor() and not %AnimationPlayer.current_animation and not %Jump.visible:
+    elif not is_on_floor() and not %AnimationPlayer.current_animation and not (%Jump.visible or %Kick.visible):
         start_animation("jump")
 
 
@@ -87,8 +87,7 @@ func start_animation(action_name: String) -> void:
         "parry":
             %AnimationPlayer.play("parry")
 
-    await %AnimationPlayer.animation_finished
-    %AnimationPlayer.play("RESET")
+    %AnimationPlayer.queue("RESET")
 
 
 func is_stunned() -> bool:
