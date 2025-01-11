@@ -45,7 +45,7 @@ func _physics_process(delta: float) -> void:
             start_animation("kick")
 
 
-func be_punched(puncher_position: Vector2, punch_power: float) -> void:
+func be_attacked(puncher_position: Vector2, punch_power: float) -> void:
     start_animation("hurt")
 
     if puncher_position.x < global_position.x:
