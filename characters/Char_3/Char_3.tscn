@@ -1,5 +1,6 @@
-[gd_scene load_steps=13 format=3 uid="uid://kjgh2ejyopx1"]
+[gd_scene load_steps=15 format=3 uid="uid://kjgh2ejyopx1"]
 
+[ext_resource type="Script" path="res://characters/Char_3/char_3.gd" id="1_molds"]
 [ext_resource type="PackedScene" uid="uid://cckckmabm8v0m" path="res://characters/Char_3/Stand.tscn" id="1_wp48u"]
 [ext_resource type="PackedScene" uid="uid://gvxkoanicbma" path="res://characters/Char_3/Punch.tscn" id="2_o4wkn"]
 [ext_resource type="PackedScene" uid="uid://gnl8bt0ynevs" path="res://characters/Char_3/Hurt.tscn" id="3_xia8s"]
@@ -8,13 +9,17 @@
 [ext_resource type="PackedScene" uid="uid://b8tmyvaj8jrd4" path="res://characters/Char_3/Move.tscn" id="6_j00ub"]
 [ext_resource type="PackedScene" uid="uid://7ehmanmkucrm" path="res://characters/Char_3/Parry.tscn" id="7_kyux3"]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nmswo"]
+radius = 14.0
+height = 42.0
+
 [sub_resource type="Animation" id="Animation_mwrwe"]
 resource_name = "punch"
 length = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Stand:visible")
+tracks/0/path = NodePath("CharacterBody2D/Stand:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -26,7 +31,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Punch:visible")
+tracks/1/path = NodePath("CharacterBody2D/Punch:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -41,7 +46,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Stand:visible")
+tracks/0/path = NodePath("CharacterBody2D/Stand:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -53,7 +58,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Punch:visible")
+tracks/1/path = NodePath("CharacterBody2D/Punch:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -65,7 +70,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Hurt:visible")
+tracks/2/path = NodePath("CharacterBody2D/Hurt:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -77,7 +82,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Kick:visible")
+tracks/3/path = NodePath("CharacterBody2D/Kick:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -89,7 +94,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Parry:visible")
+tracks/4/path = NodePath("CharacterBody2D/Parry:visible")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -105,7 +110,7 @@ length = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Stand:visible")
+tracks/0/path = NodePath("CharacterBody2D/Stand:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -117,7 +122,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Hurt:visible")
+tracks/1/path = NodePath("CharacterBody2D/Hurt:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -133,7 +138,7 @@ length = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Stand:visible")
+tracks/0/path = NodePath("CharacterBody2D/Stand:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -145,7 +150,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Parry:visible")
+tracks/1/path = NodePath("CharacterBody2D/Parry:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -164,26 +169,32 @@ _data = {
 }
 
 [node name="Char3" type="Node2D"]
+script = ExtResource("1_molds")
 
-[node name="Stand" parent="." instance=ExtResource("1_wp48u")]
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
 
-[node name="Punch" parent="." instance=ExtResource("2_o4wkn")]
+[node name="Stand" parent="CharacterBody2D" instance=ExtResource("1_wp48u")]
+
+[node name="Punch" parent="CharacterBody2D" instance=ExtResource("2_o4wkn")]
 visible = false
 
-[node name="Hurt" parent="." instance=ExtResource("3_xia8s")]
+[node name="Hurt" parent="CharacterBody2D" instance=ExtResource("3_xia8s")]
 visible = false
 
-[node name="Jump" parent="." instance=ExtResource("4_g5r8r")]
+[node name="Jump" parent="CharacterBody2D" instance=ExtResource("4_g5r8r")]
 visible = false
 
-[node name="Kick" parent="." instance=ExtResource("5_jueg0")]
+[node name="Kick" parent="CharacterBody2D" instance=ExtResource("5_jueg0")]
 visible = false
 
-[node name="Move" parent="." instance=ExtResource("6_j00ub")]
+[node name="Move" parent="CharacterBody2D" instance=ExtResource("6_j00ub")]
 visible = false
 
-[node name="Parry" parent="." instance=ExtResource("7_kyux3")]
+[node name="Parry" parent="CharacterBody2D" instance=ExtResource("7_kyux3")]
 visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+shape = SubResource("CapsuleShape2D_nmswo")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
