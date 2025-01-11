@@ -40,9 +40,19 @@ func _physics_process(delta: float) -> void:
 
     if Input.is_action_just_pressed(ACTION["attack"]) and not %AnimationPlayer.current_animation:
         if is_on_floor():
-            do_action("punch")
+            start_animation("punch")
         else:
-            do_action("kick")
+            print("kick not yet handled")
+            pass
+
+
+func be_punched(puncher_position: Vector2, punch_power: float) -> void:
+    start_animation("hurt")
+
+    if puncher_position.x < position.x:
+        velocity = Vector2(punch_power, -punch_power)
+    else:
+        velocity = Vector2(-punch_power, -punch_power)
 
 
 func update_sprite() -> void:
@@ -61,7 +71,7 @@ func update_sprite() -> void:
         %Jump.visible = true
 
 
-func do_action(action_name: String) -> void:
+func start_animation(action_name: String) -> void:
     assert(action_name in ["punch", "hurt", "jump", "kick", "move", "parry"], "invalid action used")
 
     match action_name:

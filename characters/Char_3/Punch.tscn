@@ -1,11 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://gvxkoanicbma"]
+[gd_scene load_steps=4 format=3 uid="uid://gvxkoanicbma"]
 
 [ext_resource type="Texture2D" uid="uid://bf2mtmkd6qcm4" path="res://assets/sprites/Char_3/Char_3_atlas.tres" id="1_2nscr"]
+[ext_resource type="Script" path="res://characters/Char_3/punch.gd" id="2_r2i3x"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qalj1"]
 radius = 16.0312
 
 [node name="Punch" type="Node2D"]
+script = ExtResource("2_r2i3x")
+PUNCH_POWER = 150.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_2nscr")
@@ -13,7 +16,10 @@ region_enabled = true
 region_rect = Rect2(128, 128, 64, 64)
 
 [node name="Area2D" type="Area2D" parent="."]
+unique_name_in_owner = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(6, -1)
 shape = SubResource("CircleShape2D_qalj1")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
