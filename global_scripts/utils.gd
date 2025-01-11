@@ -4,7 +4,7 @@ extends Node
 func is_facing_left(node: Node2D) -> bool:
     assert(node)
 
-    return node.scale.y == -1 and abs(node.rotation_degrees) == 180
+    return roundf(abs(node.scale.y) * 10000) / 10000 and abs(node.rotation_degrees) == 180
 
 
 func get_keyboard_actions(player_number: int) -> Dictionary:

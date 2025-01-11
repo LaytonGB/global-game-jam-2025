@@ -5,14 +5,18 @@
 
 [node name="CharacterTesting" type="Node2D"]
 
-[node name="Char3" parent="." instance=ExtResource("1_qr6ux")]
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2(-858, -918)
+scale = Vector2(2.5, 2.5)
+
+[node name="Char3" parent="Node2D" instance=ExtResource("1_qr6ux")]
 position = Vector2(444, 532)
 PLAYER_NUMBER = 1
 
-[node name="Char4" parent="." instance=ExtResource("1_qr6ux")]
+[node name="Char4" parent="Node2D" instance=ExtResource("1_qr6ux")]
 position = Vector2(686, 532)
 PLAYER_NUMBER = 2
 
-[node name="Platform" parent="." instance=ExtResource("2_kmrmd")]
+[node name="Platform" parent="Node2D" instance=ExtResource("2_kmrmd")]
 position = Vector2(571, 569)
 scale = Vector2(15.905, 15.905)

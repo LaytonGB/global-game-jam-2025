@@ -55,12 +55,14 @@ func be_punched(puncher_position: Vector2, punch_power: float) -> void:
 
 
 func update_sprite(direction: float) -> void:
+    print({"scaleY": scale.y, "rotation_degrees": rotation_degrees})
     if direction < 0:
         if not $/root/Utils.is_facing_left(self):
             scale.x = -1
     elif direction > 0:
         if $/root/Utils.is_facing_left(self):
             scale.x = -1
+    print({"scaleY": scale.y, "rotation_degrees": rotation_degrees})
 
     if is_on_floor() and not %AnimationPlayer.current_animation and not %Stand.visible:
         %AnimationPlayer.play("RESET")
