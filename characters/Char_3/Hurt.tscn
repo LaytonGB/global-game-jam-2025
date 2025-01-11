@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://gnl8bt0ynevs"]
+
+[ext_resource type="Texture2D" uid="uid://bf2mtmkd6qcm4" path="res://assets/sprites/Char_3/Char_3_atlas.tres" id="1_x7y72"]
+
+[node name="Hurt" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_x7y72")
+region_enabled = true
+region_rect = Rect2(320, 192, 64, 64)

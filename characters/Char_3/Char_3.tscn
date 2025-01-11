@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://kjgh2ejyopx1"]
+
+[ext_resource type="PackedScene" uid="uid://cckckmabm8v0m" path="res://characters/Char_3/Stand.tscn" id="1_wp48u"]
+
+[node name="Char3" type="Node2D"]
+
+[node name="Stand" parent="." instance=ExtResource("1_wp48u")]
