@@ -42,14 +42,13 @@ func _physics_process(delta: float) -> void:
         if is_on_floor():
             start_animation("punch")
         else:
-            print("kick not yet handled")
-            pass
+            start_animation("kick")
 
 
 func be_punched(puncher_position: Vector2, punch_power: float) -> void:
     start_animation("hurt")
 
-    if puncher_position.x < position.x:
+    if puncher_position.x < global_position.x:
         velocity = Vector2(punch_power, -punch_power * 1.2)
     else:
         velocity = Vector2(-punch_power, -punch_power * 1.2)
@@ -81,6 +80,7 @@ func start_animation(action_name: String) -> void:
             %AnimationPlayer.play("jump")
             return
         "kick":
+            %AnimationPlayer.play("kick")
             return
         "move":
             return
@@ -89,6 +89,7 @@ func start_animation(action_name: String) -> void:
 
     await %AnimationPlayer.animation_finished
     %AnimationPlayer.play("RESET")
+
 
 func is_stunned() -> bool:
     return %AnimationPlayer.current_animation == "hurt"

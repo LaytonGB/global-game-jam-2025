@@ -8,7 +8,6 @@ radius = 16.0312
 
 [node name="Punch" type="Node2D"]
 script = ExtResource("2_r2i3x")
-PUNCH_POWER = 150.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_2nscr")
