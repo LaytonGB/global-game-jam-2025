@@ -172,6 +172,7 @@ _data = {
 script = ExtResource("2_ig1h5")
 SPEED = 300.0
 JUMP_VELOCITY = -400.0
+AIR_MOVEMENT_FRACTION = 20.0
 
 [node name="Stand" parent="." instance=ExtResource("1_wp48u")]
 unique_name_in_owner = true

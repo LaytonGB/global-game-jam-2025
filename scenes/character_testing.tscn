@@ -6,8 +6,12 @@
 [node name="CharacterTesting" type="Node2D"]
 
 [node name="Char3" parent="." instance=ExtResource("1_qr6ux")]
-position = Vector2(596, 256)
-AIR_MOVEMENT_FRACTION = 20.0
+position = Vector2(427, 331)
+PLAYER_NUMBER = 1
+
+[node name="Char4" parent="." instance=ExtResource("1_qr6ux")]
+position = Vector2(623, 332)
+PLAYER_NUMBER = 2
 
 [node name="Platform" parent="." instance=ExtResource("2_kmrmd")]
 position = Vector2(518, 369)
