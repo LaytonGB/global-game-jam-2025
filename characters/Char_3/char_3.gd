@@ -21,13 +21,13 @@ func _physics_process(delta: float) -> void:
         velocity += get_gravity() * delta
 
     # Handle jump.
-    if Input.is_action_just_pressed(ACTION["jump"]) and is_on_floor():
+    if Input.is_action_just_pressed(ACTION["jump"]) and is_on_floor() and not is_stunned():
         velocity.y = JUMP_VELOCITY
 
     # Get the input direction and handle the movement/deceleration.
     # As good practice, you should replace UI actions with custom gameplay actions.
     var direction := Input.get_axis(ACTION["left"], ACTION["right"])
-    if direction:
+    if direction and not is_stunned():
         if is_on_floor():
             velocity.x = direction * SPEED
         else:
@@ -36,7 +36,7 @@ func _physics_process(delta: float) -> void:
         velocity.x = move_toward(velocity.x, 0, SPEED)
 
     move_and_slide()
-    update_sprite()
+    update_sprite(direction)
 
     if Input.is_action_just_pressed(ACTION["attack"]) and not %AnimationPlayer.current_animation:
         if is_on_floor():
@@ -50,25 +50,23 @@ func be_punched(puncher_position: Vector2, punch_power: float) -> void:
     start_animation("hurt")
 
     if puncher_position.x < position.x:
-        velocity = Vector2(punch_power, -punch_power)
+        velocity = Vector2(punch_power, -punch_power * 1.2)
     else:
-        velocity = Vector2(-punch_power, -punch_power)
+        velocity = Vector2(-punch_power, -punch_power * 1.2)
 
 
-func update_sprite() -> void:
-    if velocity.x < 0:
+func update_sprite(direction: float) -> void:
+    if direction < 0:
         if not $/root/Utils.is_facing_left(self):
             scale.x = -1
-    elif velocity.x > 0:
+    elif direction > 0:
         if $/root/Utils.is_facing_left(self):
             scale.x = -1
 
     if is_on_floor() and not %AnimationPlayer.current_animation and not %Stand.visible:
-        %Jump.visible = false
-        %Stand.visible = true
+        %AnimationPlayer.play("RESET")
     elif not is_on_floor() and not %AnimationPlayer.current_animation and not %Jump.visible:
-        %Stand.visible = false
-        %Jump.visible = true
+        start_animation("jump")
 
 
 func start_animation(action_name: String) -> void:
@@ -80,6 +78,7 @@ func start_animation(action_name: String) -> void:
         "hurt":
             %AnimationPlayer.play("hurt")
         "jump":
+            %AnimationPlayer.play("jump")
             return
         "kick":
             return
@@ -90,3 +89,6 @@ func start_animation(action_name: String) -> void:
 
     await %AnimationPlayer.animation_finished
     %AnimationPlayer.play("RESET")
+
+func is_stunned() -> bool:
+    return %AnimationPlayer.current_animation == "hurt"
