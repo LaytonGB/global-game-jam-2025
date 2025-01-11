@@ -20,3 +20,6 @@ PLAYER_NUMBER = 2
 [node name="Platform" parent="Node2D" instance=ExtResource("2_kmrmd")]
 position = Vector2(571, 569)
 scale = Vector2(15.905, 15.905)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(576, 325)
