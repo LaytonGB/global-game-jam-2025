@@ -36,10 +36,10 @@ func _physics_process(delta: float) -> void:
 
 func update_sprite() -> void:
     if velocity.x < 0:
-        if is_facing_right():
+        if not $/root/Utils.is_facing_left(self):
             scale.x = -1
     elif velocity.x > 0:
-        if not is_facing_right():
+        if $/root/Utils.is_facing_left(self):
             scale.x = -1
 
     if is_on_floor() and not %AnimationPlayer.current_animation and not %Stand.visible:
