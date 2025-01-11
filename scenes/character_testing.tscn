@@ -11,6 +11,8 @@ PLAYER_NUMBER = 1
 
 [node name="Char4" parent="." instance=ExtResource("1_qr6ux")]
 position = Vector2(623, 332)
+rotation = -3.14159
+scale = Vector2(1, -1)
 PLAYER_NUMBER = 2
 
 [node name="Platform" parent="." instance=ExtResource("2_kmrmd")]
