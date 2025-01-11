@@ -1,7 +1,191 @@
-[gd_scene load_steps=2 format=3 uid="uid://kjgh2ejyopx1"]
+[gd_scene load_steps=13 format=3 uid="uid://kjgh2ejyopx1"]
 
 [ext_resource type="PackedScene" uid="uid://cckckmabm8v0m" path="res://characters/Char_3/Stand.tscn" id="1_wp48u"]
+[ext_resource type="PackedScene" uid="uid://gvxkoanicbma" path="res://characters/Char_3/Punch.tscn" id="2_o4wkn"]
+[ext_resource type="PackedScene" uid="uid://gnl8bt0ynevs" path="res://characters/Char_3/Hurt.tscn" id="3_xia8s"]
+[ext_resource type="PackedScene" uid="uid://b4sxlfgia36wl" path="res://characters/Char_3/Jump.tscn" id="4_g5r8r"]
+[ext_resource type="PackedScene" uid="uid://5bxfeqsm41fm" path="res://characters/Char_3/Kick.tscn" id="5_jueg0"]
+[ext_resource type="PackedScene" uid="uid://b8tmyvaj8jrd4" path="res://characters/Char_3/Move.tscn" id="6_j00ub"]
+[ext_resource type="PackedScene" uid="uid://7ehmanmkucrm" path="res://characters/Char_3/Parry.tscn" id="7_kyux3"]
+
+[sub_resource type="Animation" id="Animation_mwrwe"]
+resource_name = "punch"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Stand:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Punch:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_gas2i"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Stand:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Punch:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Hurt:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Kick:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Parry:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_ngtes"]
+resource_name = "hurt"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Stand:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Hurt:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_slqxi"]
+resource_name = "parry"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Stand:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Parry:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2nhvh"]
+_data = {
+"RESET": SubResource("Animation_gas2i"),
+"hurt": SubResource("Animation_ngtes"),
+"parry": SubResource("Animation_slqxi"),
+"punch": SubResource("Animation_mwrwe")
+}
 
 [node name="Char3" type="Node2D"]
 
 [node name="Stand" parent="." instance=ExtResource("1_wp48u")]
+
+[node name="Punch" parent="." instance=ExtResource("2_o4wkn")]
+visible = false
+
+[node name="Hurt" parent="." instance=ExtResource("3_xia8s")]
+visible = false
+
+[node name="Jump" parent="." instance=ExtResource("4_g5r8r")]
+visible = false
+
+[node name="Kick" parent="." instance=ExtResource("5_jueg0")]
+visible = false
+
+[node name="Move" parent="." instance=ExtResource("6_j00ub")]
+visible = false
+
+[node name="Parry" parent="." instance=ExtResource("7_kyux3")]
+visible = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_2nhvh")
+}
