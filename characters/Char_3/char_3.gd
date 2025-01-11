@@ -35,6 +35,13 @@ func _physics_process(delta: float) -> void:
 
 
 func update_sprite() -> void:
+    if velocity.x < 0:
+        if is_facing_right():
+            scale.x = -1
+    elif velocity.x > 0:
+        if not is_facing_right():
+            scale.x = -1
+
     if is_on_floor() and not %AnimationPlayer.current_animation and not %Stand.visible:
         %Jump.visible = false
         %Stand.visible = true
@@ -62,3 +69,7 @@ func _do_action(action_name: String) -> void:
 
     await %AnimationPlayer.animation_finished
     %AnimationPlayer.play("RESET")
+
+
+func is_facing_right() -> bool:
+    return scale.y == 1
