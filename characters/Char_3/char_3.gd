@@ -80,7 +80,3 @@ func do_action(action_name: String) -> void:
 
     await %AnimationPlayer.animation_finished
     %AnimationPlayer.play("RESET")
-
-
-func is_facing_right() -> bool:
-    return scale.y == 1

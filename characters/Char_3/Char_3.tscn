@@ -13,34 +13,6 @@
 radius = 14.0
 height = 42.0
 
-[sub_resource type="Animation" id="Animation_eyca8"]
-resource_name = "hurt"
-length = 0.21
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Stand:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Hurt:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-
 [sub_resource type="Animation" id="Animation_vp1sf"]
 length = 0.001
 tracks/0/type = "value"
@@ -79,6 +51,46 @@ tracks/2/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Punch/Area2D:monitoring")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_eyca8"]
+resource_name = "hurt"
+length = 0.21
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Stand:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Hurt:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_6sox1"]
 resource_name = "punch"
@@ -107,6 +119,18 @@ tracks/1/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Punch/Area2D:monitoring")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_jmdlu"]
 _data = {
@@ -128,6 +152,10 @@ unique_name_in_owner = true
 unique_name_in_owner = true
 visible = false
 
+[node name="Area2D" parent="Punch" index="1"]
+monitoring = false
+monitorable = false
+
 [node name="Hurt" parent="." instance=ExtResource("3_xia8s")]
 unique_name_in_owner = true
 visible = false
@@ -139,6 +167,10 @@ visible = false
 [node name="Kick" parent="." instance=ExtResource("5_jueg0")]
 unique_name_in_owner = true
 visible = false
+
+[node name="Area2D" parent="Kick" index="1"]
+monitoring = false
+monitorable = false
 
 [node name="Move" parent="." instance=ExtResource("6_j00ub")]
 unique_name_in_owner = true
@@ -156,3 +188,6 @@ unique_name_in_owner = true
 libraries = {
 "": SubResource("AnimationLibrary_jmdlu")
 }
+
+[editable path="Punch"]
+[editable path="Kick"]
