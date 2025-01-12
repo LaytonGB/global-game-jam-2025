@@ -1,19 +1,24 @@
 [gd_scene load_steps=14 format=3 uid="uid://b2u45hejaell6"]
 
-[ext_resource type="PackedScene" uid="uid://ppan0yx7udc2" path="res://props/car/car.tscn" id="1_212jd"]
-[ext_resource type="PackedScene" uid="uid://kjgh2ejyopx1" path="res://characters/Char_3/Char_3.tscn" id="2_s4vie"]
-[ext_resource type="Shader" path="res://shaders/pixelize.gdshader" id="2_u5eck"]
-[ext_resource type="Script" path="res://scenes/main/animation_player.gd" id="3_lvrgi"]
-[ext_resource type="Script" path="res://scenes/character_testing/area_2d.gd" id="4_7qnjt"]
-[ext_resource type="PackedScene" uid="uid://cidhr0u713xur" path="res://props/road.tscn" id="5_7x78y"]
+[ext_resource type="PackedScene" uid="uid://cidhr0u713xur" path="res://props/road.tscn" id="1_rc1ln"]
+[ext_resource type="Shader" path="res://shaders/pixelize.gdshader" id="2_68txd"]
+[ext_resource type="Script" path="res://scenes/main/animation_player.gd" id="3_7yym4"]
+[ext_resource type="PackedScene" uid="uid://ppan0yx7udc2" path="res://props/car/car.tscn" id="4_avtl8"]
+[ext_resource type="PackedScene" uid="uid://kjgh2ejyopx1" path="res://characters/Char_3/Char_3.tscn" id="5_4idop"]
+[ext_resource type="Script" path="res://scenes/character_testing/area_2d.gd" id="6_wp2fc"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rrnoh"]
 render_priority = 0
-shader = ExtResource("2_u5eck")
+shader = ExtResource("2_68txd")
+shader_parameter/shadows_enabled = true
+shader_parameter/highlights_enabled = true
+shader_parameter/shadow_strength = 0.4
+shader_parameter/highlight_strength = 0.1
+shader_parameter/highlight_color = Color(1, 1, 1, 1)
+shader_parameter/shadow_color = Color(0, 0, 0, 1)
 
 [sub_resource type="QuadMesh" id="QuadMesh_r1gab"]
 material = SubResource("ShaderMaterial_rrnoh")
-flip_faces = true
 size = Vector2(2, 2)
 
 [sub_resource type="Animation" id="Animation_t58dh"]
@@ -61,17 +66,25 @@ size = Vector2(1.9, 2.93333)
 size = Vector2(1602, 310)
 
 [node name="Main" type="Control"]
+clip_contents = true
 layout_mode = 3
-anchors_preset = 0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="BG Viewport" type="SubViewportContainer" parent="."]
+texture_filter = 1
+clip_contents = true
 layout_mode = 0
-offset_right = 1152.0
-offset_bottom = 648.0
+offset_right = 400.0
+offset_bottom = 300.0
+stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="BG Viewport"]
 handle_input_locally = false
-size = Vector2i(1152, 648)
+size = Vector2i(400, 300)
 render_target_update_mode = 4
 
 [node name="Road" type="Node3D" parent="BG Viewport/SubViewport"]
@@ -86,72 +99,73 @@ light_energy = 0.25
 [node name="Camera and Road" type="Node3D" parent="BG Viewport/SubViewport/Road"]
 transform = Transform3D(14.4527, 0, 0, 0, 14.4527, 0, 0, 0, 14.4527, 0, 0, 0)
 
-[node name="Road" parent="BG Viewport/SubViewport/Road/Camera and Road" instance=ExtResource("5_7x78y")]
+[node name="Road" parent="BG Viewport/SubViewport/Road/Camera and Road" instance=ExtResource("1_rc1ln")]
 transform = Transform3D(0.0691912, 0, 0, 0, 0.0691912, 0, 0, 0, 0.0691912, 0, 0, 0)
 
 [node name="Camera3D" type="Camera3D" parent="BG Viewport/SubViewport/Road/Camera and Road"]
 transform = Transform3D(0.0691912, 0, 0, 0, 0.0691912, 0, 0, 0, 0.0691912, 0, 0.390722, 0.911582)
+current = true
 fov = 33.75
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="BG Viewport/SubViewport/Road/Camera and Road/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+extra_cull_margin = 16384.0
+ignore_occlusion_culling = true
 mesh = SubResource("QuadMesh_r1gab")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="BG Viewport/SubViewport/Road/Camera and Road"]
 libraries = {
 "": SubResource("AnimationLibrary_u3y3u")
 }
-script = ExtResource("3_lvrgi")
+script = ExtResource("3_7yym4")
 
-[node name="Car" parent="BG Viewport/SubViewport/Road" instance=ExtResource("1_212jd")]
+[node name="Car" parent="BG Viewport/SubViewport/Road" instance=ExtResource("4_avtl8")]
 transform = Transform3D(-0.706238, -1.37466e-08, 1.00507e-07, 4.32783e-08, 0.592019, 0.385079, -9.17475e-08, 0.385079, -0.592019, -1.5, 4.625, 3.18)
 
-[node name="Car2" parent="BG Viewport/SubViewport/Road" instance=ExtResource("1_212jd")]
+[node name="Car2" parent="BG Viewport/SubViewport/Road" instance=ExtResource("4_avtl8")]
 transform = Transform3D(-0.706238, -1.37466e-08, 1.00507e-07, 4.32783e-08, 0.592019, 0.385079, -9.17475e-08, 0.385079, -0.592019, 1.5, 4.625, 3.18)
 
-[node name="Fight Viewport" type="SubViewportContainer" parent="."]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="Fight" type="Node2D" parent="Fight Viewport"]
+[node name="Fight" type="Node2D" parent="."]
 texture_filter = 1
+position = Vector2(-60, 0)
+scale = Vector2(0.452577, 0.452577)
 
-[node name="Node2D" type="Node2D" parent="Fight Viewport/Fight"]
+[node name="Node2D" type="Node2D" parent="Fight"]
 position = Vector2(-858, -1077)
 scale = Vector2(2.5, 2.5)
 
-[node name="Char1" parent="Fight Viewport/Fight/Node2D" instance=ExtResource("2_s4vie")]
+[node name="Char1" parent="Fight/Node2D" instance=ExtResource("5_4idop")]
 position = Vector2(511.2, 537.6)
 PLAYER_NUMBER = 1
 
-[node name="Char2" parent="Fight Viewport/Fight/Node2D" instance=ExtResource("2_s4vie")]
+[node name="Char2" parent="Fight/Node2D" instance=ExtResource("5_4idop")]
 position = Vector2(636.4, 537.6)
 PLAYER_NUMBER = 2
 
-[node name="LeftCar" type="StaticBody2D" parent="Fight Viewport/Fight/Node2D"]
+[node name="LeftCar" type="StaticBody2D" parent="Fight/Node2D"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Fight Viewport/Fight/Node2D/LeftCar"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Fight/Node2D/LeftCar"]
 position = Vector2(511.2, 603.2)
 scale = Vector2(30, 30)
 shape = SubResource("RectangleShape2D_ytb2a")
 
-[node name="RightCar" type="StaticBody2D" parent="Fight Viewport/Fight/Node2D"]
+[node name="RightCar" type="StaticBody2D" parent="Fight/Node2D"]
 position = Vector2(184.8, 0)
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Fight Viewport/Fight/Node2D/RightCar"]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Fight/Node2D/RightCar"]
 position = Vector2(450.3, 603.2)
 scale = Vector2(30, 30)
 shape = SubResource("RectangleShape2D_ytb2a")
 
-[node name="Camera2D" type="Camera2D" parent="Fight Viewport/Fight"]
+[node name="Camera2D" type="Camera2D" parent="Fight"]
 texture_filter = 1
 position = Vector2(576, 325)
 
-[node name="Area2D" type="Area2D" parent="Fight Viewport/Fight"]
-script = ExtResource("4_7qnjt")
+[node name="Area2D" type="Area2D" parent="Fight"]
+script = ExtResource("6_wp2fc")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Fight Viewport/Fight/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Fight/Area2D"]
 position = Vector2(571, 522)
 shape = SubResource("RectangleShape2D_hr01j")
 
-[connection signal="body_entered" from="Fight Viewport/Fight/Area2D" to="Fight Viewport/Fight/Area2D" method="_on_body_entered"]
+[connection signal="body_entered" from="Fight/Area2D" to="Fight/Area2D" method="_on_body_entered"]

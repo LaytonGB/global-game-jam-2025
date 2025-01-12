@@ -34,7 +34,7 @@ import_script/path=""
 _subresources={
 "nodes": {
 "PATH:Cylinder": {
-"mesh_instance/cast_shadow": 2
+"mesh_instance/cast_shadow": 0
 }
 }
 }

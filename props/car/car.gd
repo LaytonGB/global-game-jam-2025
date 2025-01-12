@@ -2,7 +2,7 @@ extends Node3D
 
 
 @export var MAX_ROTATION_DELTA: float = 0.3
-@export var MAX_ROTATION: float = 2
+@export var MAX_ROTATION: float = 1
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

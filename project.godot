@@ -18,6 +18,14 @@ config/icon="res://icon.svg"
 
 Utils="*res://global_scripts/utils.gd"
 
+[display]
+
+window/size/viewport_width=400
+window/size/viewport_height=300
+window/stretch/mode="viewport"
+window/stretch/aspect="keep_height"
+window/stretch/scale_mode="integer"
+
 [input]
 
 p1_move_left={
