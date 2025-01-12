@@ -1,15 +1,61 @@
-[gd_scene load_steps=8 format=3 uid="uid://b2u45hejaell6"]
+[gd_scene load_steps=14 format=3 uid="uid://b2u45hejaell6"]
 
 [ext_resource type="PackedScene" uid="uid://ppan0yx7udc2" path="res://props/car.tscn" id="1_212jd"]
 [ext_resource type="PackedScene" uid="uid://kjgh2ejyopx1" path="res://characters/Char_3/Char_3.tscn" id="2_s4vie"]
+[ext_resource type="Shader" path="res://shaders/pixelize.gdshader" id="2_u5eck"]
+[ext_resource type="Script" path="res://scenes/main/animation_player.gd" id="3_lvrgi"]
 [ext_resource type="Script" path="res://scenes/character_testing/area_2d.gd" id="4_7qnjt"]
+[ext_resource type="PackedScene" uid="uid://cidhr0u713xur" path="res://props/road.tscn" id="5_7x78y"]
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_7hr7n"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rrnoh"]
+render_priority = 0
+shader = ExtResource("2_u5eck")
 
-[sub_resource type="SphereMesh" id="SphereMesh_8bm54"]
+[sub_resource type="QuadMesh" id="QuadMesh_r1gab"]
+material = SubResource("ShaderMaterial_rrnoh")
+flip_faces = true
+size = Vector2(2, 2)
+
+[sub_resource type="Animation" id="Animation_rgfx3"]
+resource_name = "road_move"
+length = 15.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Road:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 15),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(6.28319, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_t58dh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Road:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_u3y3u"]
+_data = {
+"RESET": SubResource("Animation_t58dh"),
+"road_move": SubResource("Animation_rgfx3")
+}
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ytb2a"]
-size = Vector2(3.06667, 3.73333)
+size = Vector2(1.9, 2.93333)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hr01j"]
 size = Vector2(1602, 158)
@@ -20,8 +66,8 @@ anchors_preset = 0
 
 [node name="BG Viewport" type="SubViewportContainer" parent="."]
 layout_mode = 0
-offset_right = 512.0
-offset_bottom = 512.0
+offset_right = 1152.0
+offset_bottom = 648.0
 
 [node name="SubViewport" type="SubViewport" parent="BG Viewport"]
 handle_input_locally = false
@@ -31,33 +77,37 @@ render_target_update_mode = 4
 [node name="Road" type="Node3D" parent="BG Viewport/SubViewport"]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="BG Viewport/SubViewport/Road"]
-transform = Transform3D(-0.707107, -0.353553, 0.612372, 0, 0.866025, 0.5, -0.707107, 0.353553, -0.612372, 0, 0, 0)
+transform = Transform3D(-0.707107, -0.353553, 0.612373, 0, 0.866026, 0.5, -0.707107, 0.353553, -0.612373, 10.8311, 11.3911, -10.4663)
 
 [node name="DirectionalLight3D2" type="DirectionalLight3D" parent="BG Viewport/SubViewport/Road"]
-transform = Transform3D(0.965926, 0.12941, -0.224144, 0, 0.866025, 0.5, 0.258819, -0.482963, 0.836516, 0, 0, 0)
+transform = Transform3D(0.965926, 0.12941, -0.224144, 0, 0.866025, 0.5, 0.258819, -0.482963, 0.836516, 0, 10.0336, 11.2931)
 light_energy = 0.25
 
 [node name="Camera and Road" type="Node3D" parent="BG Viewport/SubViewport/Road"]
 transform = Transform3D(14.4527, 0, 0, 0, 14.4527, 0, 0, 0, 14.4527, 0, 0, 0)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="BG Viewport/SubViewport/Road/Camera and Road"]
-transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="BG Viewport/SubViewport/Road/Camera and Road/StaticBody3D"]
-shape = SubResource("SphereShape3D_7hr7n")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="BG Viewport/SubViewport/Road/Camera and Road/StaticBody3D"]
-mesh = SubResource("SphereMesh_8bm54")
+[node name="Road" parent="BG Viewport/SubViewport/Road/Camera and Road" instance=ExtResource("5_7x78y")]
+transform = Transform3D(0.0691912, 0, 0, 0, 0.0691912, 0, 0, 0, 0.0691912, 0, 0, 0)
 
 [node name="Camera3D" type="Camera3D" parent="BG Viewport/SubViewport/Road/Camera and Road"]
-transform = Transform3D(0.0691912, 0, 0, 0, 0.0691912, 0, 0, 0, 0.0691912, -0.0480809, 2.41912, 2.25465)
-fov = 14.0625
+transform = Transform3D(0.0691912, 0, 0, 0, 0.0691912, 0, 0, 0, 0.0691912, 0, 0.390722, 0.911582)
+fov = 33.75
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="BG Viewport/SubViewport/Road/Camera and Road/Camera3D"]
+visible = false
+mesh = SubResource("QuadMesh_r1gab")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="BG Viewport/SubViewport/Road/Camera and Road"]
+libraries = {
+"": SubResource("AnimationLibrary_u3y3u")
+}
+script = ExtResource("3_lvrgi")
 
 [node name="Car" parent="BG Viewport/SubViewport/Road" instance=ExtResource("1_212jd")]
-transform = Transform3D(-1, -1.94645e-08, 1.42313e-07, 2.92183e-08, 0.942496, 0.334218, -1.40635e-07, 0.334218, -0.942496, -2.53712, 33.836, 12.243)
+transform = Transform3D(-0.706238, -1.37466e-08, 1.00507e-07, 4.32783e-08, 0.592019, 0.385079, -9.17475e-08, 0.385079, -0.592019, -1.5, 4.625, 3.18)
 
 [node name="Car2" parent="BG Viewport/SubViewport/Road" instance=ExtResource("1_212jd")]
-transform = Transform3D(-1, -1.94645e-08, 1.42313e-07, 2.92183e-08, 0.942496, 0.334218, -1.40635e-07, 0.334218, -0.942496, 1, 33.836, 12.243)
+transform = Transform3D(-0.706238, -1.37466e-08, 1.00507e-07, 4.32783e-08, 0.592019, 0.385079, -9.17475e-08, 0.385079, -0.592019, 1.5, 4.625, 3.18)
 
 [node name="Fight Viewport" type="SubViewportContainer" parent="."]
 layout_mode = 0
@@ -65,35 +115,37 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="Fight" type="Node2D" parent="Fight Viewport"]
+texture_filter = 1
 
 [node name="Node2D" type="Node2D" parent="Fight Viewport/Fight"]
 position = Vector2(-858, -1077)
 scale = Vector2(2.5, 2.5)
 
 [node name="Char1" parent="Fight Viewport/Fight/Node2D" instance=ExtResource("2_s4vie")]
-position = Vector2(478, 518.4)
+position = Vector2(511.2, 537.6)
 PLAYER_NUMBER = 1
 
 [node name="Char2" parent="Fight Viewport/Fight/Node2D" instance=ExtResource("2_s4vie")]
-position = Vector2(660.8, 518.4)
+position = Vector2(636.4, 537.6)
 PLAYER_NUMBER = 2
 
 [node name="LeftCar" type="StaticBody2D" parent="Fight Viewport/Fight/Node2D"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Fight Viewport/Fight/Node2D/LeftCar"]
-position = Vector2(476.8, 595.6)
+position = Vector2(511.2, 603.2)
 scale = Vector2(30, 30)
 shape = SubResource("RectangleShape2D_ytb2a")
 
 [node name="RightCar" type="StaticBody2D" parent="Fight Viewport/Fight/Node2D"]
 position = Vector2(184.8, 0)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Fight Viewport/Fight/Node2D/RightCar"]
-position = Vector2(476.8, 595.6)
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Fight Viewport/Fight/Node2D/RightCar"]
+position = Vector2(450.3, 603.2)
 scale = Vector2(30, 30)
 shape = SubResource("RectangleShape2D_ytb2a")
 
 [node name="Camera2D" type="Camera2D" parent="Fight Viewport/Fight"]
+texture_filter = 1
 position = Vector2(576, 325)
 
 [node name="Area2D" type="Area2D" parent="Fight Viewport/Fight"]
