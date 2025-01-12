@@ -1,8 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://ppan0yx7udc2"]
+[gd_scene load_steps=3 format=3 uid="uid://ppan0yx7udc2"]
 
 [ext_resource type="ArrayMesh" uid="uid://clrvhwlic74f7" path="res://assets/models/Car-Model/Car.obj" id="1_ha70s"]
+[ext_resource type="Script" path="res://props/car/car.gd" id="1_tn23g"]
 
 [node name="Node3D" type="Node3D"]
+script = ExtResource("1_tn23g")
 
 [node name="Car" type="MeshInstance3D" parent="."]
 mesh = ExtResource("1_ha70s")
