@@ -55,6 +55,10 @@ func be_attacked(puncher_position: Vector2, force_base: float) -> void:
         velocity = Vector2(-force_x, -force_base * 1.2)
 
 
+func be_defeated() -> void:
+    print("PLAYER ", PLAYER_NUMBER, " DEFEATED")
+
+
 func update_sprite(direction: float) -> void:
     if direction < 0:
         if not $/root/Utils.is_facing_left(self):

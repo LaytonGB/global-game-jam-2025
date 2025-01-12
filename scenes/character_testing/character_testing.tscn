@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://bltvewefxm1ba"]
+
+[ext_resource type="PackedScene" uid="uid://kjgh2ejyopx1" path="res://characters/Char_3/Char_3.tscn" id="1_bdi2q"]
+[ext_resource type="PackedScene" uid="uid://bkq6r3bc35b1b" path="res://props/Platform.tscn" id="2_ktdom"]
+[ext_resource type="Script" path="res://scenes/character_testing/area_2d.gd" id="3_s6bo2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x2a46"]
+size = Vector2(1602, 158)
+
+[node name="CharacterTesting" type="Node2D"]
+
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2(-858, -1034)
+scale = Vector2(2.5, 2.5)
+
+[node name="Char3" parent="Node2D" instance=ExtResource("1_bdi2q")]
+position = Vector2(444, 532)
+PLAYER_NUMBER = 1
+
+[node name="Char4" parent="Node2D" instance=ExtResource("1_bdi2q")]
+position = Vector2(686, 532)
+PLAYER_NUMBER = 2
+
+[node name="Platform" parent="Node2D" instance=ExtResource("2_ktdom")]
+position = Vector2(571, 569)
+scale = Vector2(15.905, 15.905)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(576, 325)
+
+[node name="Area2D" type="Area2D" parent="."]
+script = ExtResource("3_s6bo2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(571, 598)
+shape = SubResource("RectangleShape2D_x2a46")
+
+[connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]
