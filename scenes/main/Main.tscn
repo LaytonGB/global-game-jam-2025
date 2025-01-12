@@ -136,10 +136,14 @@ scale = Vector2(2.5, 2.5)
 
 [node name="Char1" parent="Fight/Node2D" instance=ExtResource("5_4idop")]
 position = Vector2(511.2, 537.6)
+SPEED = 150.0
+JUMP_VELOCITY = -300.0
 PLAYER_NUMBER = 1
 
 [node name="Char2" parent="Fight/Node2D" instance=ExtResource("5_4idop")]
 position = Vector2(636.4, 537.6)
+SPEED = 150.0
+JUMP_VELOCITY = -300.0
 PLAYER_NUMBER = 2
 
 [node name="LeftCar" type="StaticBody2D" parent="Fight/Node2D"]

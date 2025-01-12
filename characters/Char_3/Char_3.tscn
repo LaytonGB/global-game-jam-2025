@@ -307,6 +307,7 @@ unique_name_in_owner = true
 [node name="Punch" parent="." instance=ExtResource("2_o4wkn")]
 unique_name_in_owner = true
 visible = false
+PUNCH_POWER = 100.0
 
 [node name="Area2D" parent="Punch" index="1"]
 monitoring = false
@@ -323,6 +324,7 @@ visible = false
 [node name="Kick" parent="." instance=ExtResource("5_jueg0")]
 unique_name_in_owner = true
 visible = false
+KICK_POWER = 150.0
 
 [node name="Area2D" parent="Kick" index="1"]
 monitoring = false
