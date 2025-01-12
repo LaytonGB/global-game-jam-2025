@@ -1,11 +1,12 @@
 extends CharacterBody2D
 
 
-@export var SPEED: float
-@export var JUMP_VELOCITY: float
-@export var AIR_MOVEMENT_FRACTION: float
+@export var SPEED: float = 300
+@export var JUMP_VELOCITY: float = -400
+@export var AIR_MOVEMENT_FRACTION: float = 20
+@export var ROAD_FORCE: float = 1100
 
-@export var PLAYER_NUMBER: int
+@export var PLAYER_NUMBER: int = 0
 
 
 @onready var ACTION: Dictionary = $/root/Utils.get_keyboard_actions(PLAYER_NUMBER)
@@ -57,6 +58,7 @@ func be_attacked(puncher_position: Vector2, force_base: float) -> void:
 
 func be_defeated() -> void:
     print("PLAYER ", PLAYER_NUMBER, " DEFEATED")
+    velocity.y += ROAD_FORCE
 
 
 func update_sprite(direction: float) -> void:
